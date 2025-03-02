@@ -120,4 +120,32 @@ export const logout = () => async (dispatch) => {
       });
     }
   };
+  // Update Password
+export const updatePassword = (password) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_PASSWORD_REQUEST });
   
+      const config = { headers: { "Content-Type": "application/json" } };
+  
+      const { data } = await axios.put(`/api/v2/me/update`, password, config);
+  
+      dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_PASSWORD_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+  
+  // get All Users
+  export const getAllUsers = () => async (dispatch) => {
+    try {
+      dispatch({ type: ALL_USERS_REQUEST });
+      const { data } = await axios.get(`/api/v2/admin/users`);
+  
+      dispatch({ type: ALL_USERS_SUCCESS, payload: data.users });
+    } catch (error) {
+      dispatch({ type: ALL_USERS_FAIL, payload: error.response.data.message });
+    }
+  };
