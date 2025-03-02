@@ -74,3 +74,45 @@ export const myOrders = () => async (dispatch) => {
       });
     }
   };
+
+  
+// All order  -----Admin
+export const getAllOrders = () => async (dispatch) => {
+    try {
+      dispatch({ type: ALL_ORDERS_REQUEST });
+  
+      const { data } = await axios.get("/api/v2/admin/orders");
+  
+      dispatch({ type: ALL_ORDERS_SUCCESS, payload: data.orders });
+    } catch (error) {
+      dispatch({
+        type: ALL_ORDERS_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+  
+  // Update Order
+  export const updateOrder = (id, order) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_ORDER_REQUEST });
+  
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.put(
+        `/api/v2/admin/order/${id}`,
+        order,
+        config
+      );
+  
+      dispatch({ type: UPDATE_ORDER_SUCCESS, payload: data.success });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_ORDER_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
