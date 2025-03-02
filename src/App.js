@@ -103,3 +103,52 @@ function App() {
             path="/me/update/profile"
             component={EditProfile}
           />
+          
+        <ProtectedRoute exact path="/orders" component={MyOrder} />
+        <ProtectedRoute exact path="/order/:id" component={MyOrderDetails} />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/dashboard"
+          component={Dashboard}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/product"
+          component={CreateProduct}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/products"
+          component={AllProducts}
+        />
+
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/edit/product/:id"
+          component={EditProduct}
+        />
+
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/orders"
+          component={AllOrder}
+        />
+
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/order/:id"
+          component={UpdateOrder}
+        />
+
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/users"
+          component={AllUsers}
+        />
