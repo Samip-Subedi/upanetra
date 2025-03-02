@@ -41,7 +41,7 @@ import {
     USER_DETAILS_SUCCESS,
   } from "../constants/UserConstants";
   
-export const userReducer = (state = { user: {} }, action) => {
+  export const userReducer = (state = { user: {} }, action) => {
     switch (action.type) {
       case LOGIN_REQUEST:
       case REGISTER_USER_REQUEST:
@@ -164,3 +164,112 @@ export const userReducer = (state = { user: {} }, action) => {
         return state;
     }
   };
+  
+  // All user ----- Admin
+  export const allUsersReducer = (state = { users: [] }, action) => {
+    switch (action.type) {
+      case ALL_USERS_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+      case ALL_USERS_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          users: action.payload,
+        };
+  
+      case ALL_USERS_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+  
+      case CLEAR_ERRORS:
+        return {
+          ...state,
+          error: null,
+        };
+  
+      default:
+        return state;
+    }
+  };
+  
+  // User Details
+  export const userDetailsReducer = (state = { user: {} }, action) => {
+    switch (action.type) {
+      case USER_DETAILS_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+      case USER_DETAILS_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          user: action.payload,
+        };
+  
+      case USER_DETAILS_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+  
+      case CLEAR_ERRORS:
+        return {
+          ...state,
+          error: null,
+        };
+  
+      default:
+        return state;
+    }
+  };
+  
+  export const forgotPasswordReducer = (state = {}, action) => {
+    switch (action.type) {
+      case FORGOT_PASSWORD_REQUEST:
+      case RESET_PASSWORD_REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: null,
+        };
+      case FORGOT_PASSWORD_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          message: action.payload,
+        };
+  
+      case RESET_PASSWORD_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          success: action.payload,
+        };
+  
+      case FORGOT_PASSWORD_FAIL:
+      case RESET_PASSWORD_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+  
+      case CLEAR_ERRORS:
+        return {
+          ...state,
+          error: null,
+        };
+  
+      default:
+        return state;
+    }
+  };
+  
