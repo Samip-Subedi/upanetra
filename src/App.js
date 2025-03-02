@@ -152,3 +152,28 @@ function App() {
           path="/admin/users"
           component={AllUsers}
         />
+        
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/user/:id"
+          component={UpdateUser}
+        />
+        <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/reviews"
+          component={AllReviews}
+        />
+
+        <Route
+          component={
+            window.location.pathname === "/process/payment" ? null : Notfound
+          }
+        />
+      </Switch>
+    </Router>
+  );
+}
+
+export default App;
